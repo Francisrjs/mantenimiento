@@ -1,0 +1,144 @@
+<!-- ordenes.component.html -->
+<div class="d-flex vh-100">
+    <!-- Overlay con blur -->
+    <div *ngIf="selectedOrden" 
+    class="overlay-blur"
+    (click)="closeDetail()"></div>
+  <div class="left-panel flex-grow-1 p-4 overflow-auto" [class.blur-effect]="selectedOrden">
+    <h2 class="text-center gap-2">Órdenes de trabajo</h2>
+
+    <!-- Indicadores -->
+    <div class="container-indicator border border-secondary rounded mt-2 p-2 d-flex justify-content-around">
+      <div class="indicador text-center">
+        <iconify-icon icon="f7:wrench-fill" width="56" height="56"></iconify-icon>
+        <div class="p-2">
+          <h5>En Proceso</h5>
+          <span class="badge bg-primary fs-6">{{ ordenesEnProceso.length }}</span>
+        </div>
+      </div>
+      <div class="indicador text-center">
+        <iconify-icon icon="tabler:clock" class="icon-indicator p-2" width="8vh" height="8vh"></iconify-icon>
+        <div class="p-2">
+          <h5>Pendientes</h5>
+          <span class="badge bg-warning text-dark fs-6">{{ ordenesPendientes.length }}</span>
+        </div>
+      </div>
+      <div class="indicador text-center">
+        <iconify-icon icon="mdi:check-circle-outline" class="icon-indicator p-2" width="8vh" height="8vh"></iconify-icon>
+        <div class="p-2">
+          <h5>Terminados</h5>
+          <span class="badge bg-success fs-6">{{ ordenesTerminadas.length }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Barra de búsqueda y filtros -->
+    <div class="container-filters bg-light p-3 rounded mt-4 border border-secondary">
+      <div class="row g-3 align-items-center">
+        <div class="col-md-4">
+          <div class="input-group">
+            <span class="input-group-text"><fa-icon [icon]="faMagnifyingGlass" [fixedWidth]="true"></fa-icon></span>
+            <input type="text" class="form-control" placeholder="Buscar por patente..." [(ngModel)]="searchTerm">
+          </div>
+        </div>
+        <div class="col-md-3">
+          <input type="date" class="form-control" [(ngModel)]="fechaFiltro">
+        </div>
+        <div class="col-md-3">
+          <select class="form-select" [(ngModel)]="tipoTrabajoFiltro">
+            <option value="">Todos los tipos</option>
+            <option *ngFor="let tipo of tiposTrabajo" [value]="tipo">{{ tipo }}</option>
+          </select>
+        </div>
+        <div class="col-md-2">
+          <button class="btn btn-primary w-100" (click)="nuevaOrden()">
+            <i class="bi bi-plus-lg"></i> Nueva Orden
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Listado de tarjetas -->
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mt-3 border border-secondary">
+      <div class="col" *ngFor="let orden of ordenesFiltradas">
+        <div class="card h-100 shadow-sm border-bottom-3"
+             [ngClass]="{
+               'border-primary': orden.estado === 'En Proceso',
+               'border-warning': orden.estado === 'Pendiente',
+               'border-success': orden.estado === 'Terminado'
+             }">
+          <div class="card-header bg-transparent d-flex justify-content-between align-items-center border border-secondary"
+               [class.border-primary]="orden.estado === 'En Proceso'"
+               [class.border-warning]="orden.estado === 'Pendiente'"
+               [class.border-success]="orden.estado === 'Terminado'">
+            <h5 class="mb-0">Orden #{{ orden.id }}</h5>
+            <span class="badge"
+                  [ngClass]="{
+                    'bg-primary': orden.estado === 'En Proceso',
+                    'bg-warning text-dark': orden.estado === 'Pendiente',
+                    'bg-success': orden.estado === 'Terminado'
+                  }">
+              {{ orden.estado }}
+            </span>
+          </div>
+          <div class="card-body border border-secondary">
+            <div class="row g-2 mb-3">
+              <div class="col-6">
+                <small class="text-muted">Patente</small>
+                <p>{{ orden.patente }}</p>
+              </div>
+              <div class="col-6">
+                <small class="text-muted">Odómetro</small>
+                <p>{{ orden.odometro | number }}</p>
+              </div>
+              <div class="col-6">
+                <small class="text-muted">Ingreso</small>
+                <p>{{ orden.fechaIngreso | date:'shortDate' }}</p>
+              </div>
+              <div class="col-6">
+                <small class="text-muted">Mecánicos</small>
+                <p>{{ getMecanicosNombres(orden.mecanicoId) }}</p>
+              </div>
+            </div>
+            <small class="text-muted">Tipo de Trabajo</small>
+            <div class="d-flex flex-wrap gap-1 mb-3">
+              <span class="badge bg-secondary" *ngFor="let t of orden.tipoTrabajo">{{ t }}</span>
+            </div>
+            <small class="text-muted">Detalle</small>
+            <p class="text-truncate">{{ orden.detalle || 'Sin detalles' }}</p>
+          </div>
+          <div class="card-footer bg-transparent d-flex justify-content-between border border-secondary">
+            <button class="btn btn-sm btn-outline-secondary" (click)="viewOrden(orden)">
+              <i class="bi bi-eye"></i> Ver
+            </button>
+            <button class="btn btn-sm btn-outline-danger" (click)="confirmarEliminar(orden)">
+              <i class="bi bi-trash"></i> Eliminar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mensaje vacío -->
+    <div class="alert alert-info mt-4" *ngIf="ordenList.length===0">
+      No hay órdenes registradas.
+    </div>
+  </div>
+
+  <!-- Panel Derecho: Detalle -->
+  <div *ngIf="selectedOrden" class="detail-panel">
+    <button class="btn btn-danger btn-close-panel" (click)="closeDetail()">
+      <iconify-icon icon="ic:round-close" width="24" height="24"></iconify-icon>
+    </button>
+    <app-ordenes-detail [orden]="selectedOrden" (close)="closeDetail()" class="detail-panel"></app-ordenes-detail>
+  </div>
+  <div *ngIf="addingOrden" class="detail-panel">
+    <button class="btn btn-danger btn-close-panel" (click)="cancelAdd()">
+      <iconify-icon icon="ic:round-close" width="24" height="24"></iconify-icon>
+    </button>
+    <app-ordenes-add
+      (close)="cancelAdd()"
+      (created)="onCreated($event)">
+    </app-ordenes-add>
+  </div>
+</div>

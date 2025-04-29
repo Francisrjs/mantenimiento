@@ -1,0 +1,123 @@
+<!-- ordenes-add.component.html -->
+<div class="detail-card scrollable">
+  <!-- Título -->
+  <div class="card-heading">Nueva Orden</div>
+  
+  <!-- Formulario -->
+  <form [formGroup]="form" class="flex-grow-1 d-flex flex-column overflow-auto p-3 bg-white">
+    <!-- Estado (btn-group con colores) -->
+    <div class="mb-3">
+      <label class="form-label">Estado</label>
+      <div class="btn-group w-100 border border-secondary" role="group">
+        <button type="button" class="btn"
+                [class.btn-primary]="form.value.estado==='En Proceso'"
+                [class.btn-outline-primary]="form.value.estado!=='En Proceso'"
+                (click)="form.get('estado')?.setValue('En Proceso')">
+          En Proceso
+        </button>
+        <button type="button" class="btn"
+                [class.btn-warning]="form.value.estado==='Pendiente'"
+                [class.btn-outline-warning]="form.value.estado!=='Pendiente'"
+                (click)="form.get('estado')?.setValue('Pendiente')">
+          Pendiente
+        </button>
+        <button type="button" class="btn"
+                [class.btn-success]="form.value.estado==='Terminado'"
+                [class.btn-outline-success]="form.value.estado!=='Terminado'"
+                (click)="form.get('estado')?.setValue('Terminado')">
+          Terminado
+        </button>
+      </div>
+    </div>
+
+    <!-- Fechas -->
+    <div class="row mb-3">
+      <div class="col">
+        <label class="form-label">Fecha Ingreso</label>
+        <input type="date" formControlName="fechaIngreso" class="form-control" />
+      </div>
+      <div class="col">
+        <label class="form-label">Fecha Egreso</label>
+        <input type="date" formControlName="fechaEgreso" class="form-control" />
+      </div>
+    </div>
+
+    <!-- Patentes -->
+    <div class="row mb-3">
+      <div class="col">
+        <label class="form-label">Patente</label>
+        <input formControlName="patente" class="form-control" />
+      </div>
+      <div class="col">
+        <label class="form-label">Semi 1</label>
+        <input formControlName="patenteSemi1" class="form-control" />
+      </div>
+      <div class="col">
+        <label class="form-label">Semi 2</label>
+        <input formControlName="patenteSemi2" class="form-control" />
+      </div>
+    </div>
+
+    <!-- Odómetro -->
+    <div class="mb-3">
+      <label class="form-label">Odómetro</label>
+      <input type="number" formControlName="odometro" class="form-control" />
+    </div>
+
+    <!-- Tipo de Trabajo (dropdown multi-checkbox) -->
+    <div *ngFor="let opt of filteredTipoTrabajo" class="form-check dropdown-item">
+      <input
+  class="form-check-input"
+  type="checkbox"
+  [id]="'tt-'+opt.index"
+  [checked]="tipoTrabajoArray.at(opt.index).value"
+  (change)="tipoTrabajoArray.at(opt.index).setValue($any($event.target).checked)"
+/>
+
+      <label class="form-check-label w-100" [for]="'tt-'+opt.index">
+        {{ opt.value }}
+      </label>
+    </div>
+    
+    <!-- Anomalía -->
+    <div class="mb-3">
+      <label class="form-label">Anomalía</label>
+      <textarea formControlName="anomalia" class="form-control" rows="2"></textarea>
+    </div>
+
+    <!-- Detalle -->
+    <div class="mb-3">
+      <label class="form-label">Detalle</label>
+      <textarea formControlName="detalle" class="form-control" rows="2"></textarea>
+    </div>
+
+    <!-- Mecánicos (grid) -->
+    <div class="mb-3">
+      <label class="form-label">Mecánicos</label>
+      <div class="mecanicos-grid">
+        <div *ngFor="let m of allMecanicos" class="mecanico-item">
+          <input
+            type="checkbox"
+            [checked]="form.value.mecanico.includes(m.id)"
+            (change)="onMecanicoToggle(m.id, $any($event.target).checked)"
+            id="mec{{m.id}}" />
+          <label for="mec{{m.id}}">
+            <img src="https://cdn-icons-png.freepik.com/512/81/81159.png"
+                 width="20" height="20" alt="{{m.nombre}}" />
+            {{ m.nombre }}
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Botones pie -->
+    <div class="mt-auto d-flex justify-content-between">
+      <button type="button" class="btn btn-secondary" (click)="cancel()">
+        Cancelar
+      </button>
+      <button type="button" class="btn btn-success" [disabled]="form.invalid" (click)="create()">
+        Crear
+      </button>
+    </div>
+  </form>
+</div>

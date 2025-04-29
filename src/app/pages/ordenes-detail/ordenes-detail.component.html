@@ -1,0 +1,194 @@
+<!-- ordenes-detail.component.html -->
+<!-- Eliminamos el wrapper .overlay y .detail-container para que se integre al panel lateral -->
+<div *ngIf="orden" class="detail-card scrollable">
+  <!-- Imagen de portada -->
+  <div class="card-image">
+    <img
+      src="https://images.pexels.com/photos/1149831/pexels-photo-1149831.jpeg"
+      alt="Orden {{ orden.id }}"
+    />
+  </div>
+
+  <!-- Encabezado con ID -->
+  <div class="card-heading">
+    Orden #{{ orden.id }}
+  </div>
+
+  <!-- Botón cerrar heredado del padre, no lo duplicamos aquí -->
+
+  <!-- Acción Editar / Eliminar -->
+  <div class="action-bar bg-white p-2">
+    <button class="btn btn-sm btn-outline-primary me-2" (click)="toggleEdit()">
+      <iconify-icon
+        [icon]="editMode ? 'pepicons-pencil:eye' : 'pepicons-pencil:pen'"
+        width="20" height="20">
+      </iconify-icon>
+    </button>
+    <button class="btn btn-sm btn-outline-danger" (click)="delete()">
+      <iconify-icon icon="pepicons-pencil:trash" width="20" height="20"></iconify-icon>
+    </button>
+  </div>
+
+  <!-- Contenido: Vista o Formulario -->
+  <ng-container *ngIf="!editMode; else editTpl">
+    <div class="card-text p-3">
+      <p><strong>Estado:</strong> {{ orden.estado }}</p>
+      <p><strong>Ingreso:</strong> {{ orden.fechaIngreso }}</p>
+      <p><strong>Egreso:</strong> {{ orden.fechaEgreso }}</p>
+      <p>
+        <strong>Patentes:</strong>
+        {{ orden.patente }} / {{ orden.patenteSemi1 }} / {{ orden.patenteSemi2 }}
+      </p>
+      <p><strong>Odómetro:</strong> {{ orden.odometro }} KM</p>
+      <p><strong>Trabajo:</strong> {{ orden.tipoTrabajo.join(', ') }}</p>
+      <p><strong>Anomalía:</strong> {{ orden.anomalia }}</p>
+      <p><strong>Detalle:</strong> {{ orden.detalle }}</p>
+      <p><strong>Mecánicos:</strong> {{ getMecanicosNombres(orden.mecanicoId || []) }}</p>
+    </div>
+  </ng-container>
+
+  <!-- Formulario de edición -->
+  <ng-template #editTpl>
+    <!-- Aseguramos que el form exista antes de enlazar -->
+    <form *ngIf="form" [formGroup]="form" class="p-3 bg-white rounded">
+      <!-- Estado -->
+      <div class="mb-3">
+<label class="form-label">Estado</label>
+<div class="btn-group w-100 border border-secondary" role="group">
+  <button type="button" 
+          class="btn" 
+          [class.btn-primary]="form.get('estado')?.value === 'En Proceso'"
+          [class.btn-outline-primary]="form.get('estado')?.value !== 'En Proceso'"
+          (click)="setEstado('En Proceso')"
+          [disabled]="!editMode">
+    En Proceso
+  </button>
+  <button type="button" 
+          class="btn" 
+          [class.btn-warning]="form.get('estado')?.value === 'Pendiente'"
+          [class.btn-outline-warning]="form.get('estado')?.value !== 'Pendiente'"
+          (click)="setEstado('Pendiente')"
+          [disabled]="!editMode">
+    Pendiente
+  </button>
+  <button type="button" 
+          class="btn" 
+          [class.btn-success]="form.get('estado')?.value === 'Terminado'"
+          [class.btn-outline-success]="form.get('estado')?.value !== 'Terminado'"
+          (click)="setEstado('Terminado')"
+          [disabled]="!editMode">
+    Terminado
+  </button>
+</div>
+</div>
+
+      <!-- Fechas lado a lado -->
+      <div class="row mb-2">
+        <div class="col">
+          <label class="form-label">Fecha Ingreso</label>
+          <input type="date" formControlName="fechaIngreso" class="form-control" />
+        </div>
+        <div class="col">
+          <label class="form-label">Fecha Egreso</label>
+          <input type="date" formControlName="fechaEgreso" class="form-control" />
+        </div>
+      </div>
+
+      <!-- Patentes lado a lado -->
+      <div class="row mb-2">
+        <div class="col">
+          <label class="form-label">Patente</label>
+          <input formControlName="patente" class="form-control" />
+        </div>
+        <div class="col">
+          <label class="form-label">Semi 1</label>
+          <input formControlName="patenteSemi1" class="form-control" />
+        </div>
+        <div class="col">
+          <label class="form-label">Semi 2</label>
+          <input formControlName="patenteSemi2" class="form-control" />
+        </div>
+      </div>
+
+      <!-- Odómetro -->
+      <div class="mb-2">
+        <label class="form-label">Odómetro</label>
+        <input
+          type="number"
+          formControlName="odometro"
+          class="form-control"
+        />
+      </div>
+
+      <!-- Tipo de trabajo (checkboxes) -->
+      <div class="mb-2">
+        <label class="form-label">Tipo de Trabajo</label>
+        <div class="d-flex flex-wrap">
+          <div
+            *ngFor="let ctrl of tipoTrabajoControls; let i = index"
+            class="form-check me-3"
+          >
+            <input
+              class="form-check-input"
+              type="checkbox"
+              [formControl]="$any(ctrl)"
+              id="tt{{ i }}"
+            />
+            <label class="form-check-label" for="tt{{ i }}">
+              {{ tipoTrabajoOptions[i] }}
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Anomalía -->
+      <div class="mb-2">
+        <label class="form-label">Anomalía</label>
+        <textarea
+          formControlName="anomalia"
+          class="form-control"
+          rows="2"
+        ></textarea>
+      </div>
+
+      <!-- Detalle -->
+      <div class="mb-2">
+        <label class="form-label">Detalle</label>
+        <textarea
+          formControlName="detalle"
+          class="form-control"
+          rows="2"
+        ></textarea>
+      </div>
+
+            <!-- Mecánicos (grid) -->
+            <div class="mb-3">
+              <label class="form-label">Mecánicos</label>
+              <div class="mecanicos-grid">
+                <div *ngFor="let m of allMecanicos" class="mecanico-item">
+                  <input
+                    type="checkbox"
+                    [checked]="form.value.mecanico.includes(m.id)"
+                    (change)="onMecanicoToggle(m.id, $any($event.target).checked)"
+                    id="mec{{ m.id }}" />
+                  <label for="mec{{ m.id }}">
+                    <img src="https://cdn-icons-png.freepik.com/512/81/81159.png" width="20px" height="20px" alt="{{ m.nombre }}" />
+                    {{ m.nombre }}
+                  </label>
+                </div>
+              </div>
+            </div>
+
+      <!-- Botón guardar -->
+      <button
+        type="button"
+        class="card-button"
+        [class.btn-success]="!form.invalid"
+        [class.disabled]="form.invalid"
+        (click)="save()"
+      >
+        Guardar
+      </button>
+    </form>
+  </ng-template>
+</div>

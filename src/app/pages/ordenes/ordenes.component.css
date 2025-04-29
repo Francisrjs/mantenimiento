@@ -1,0 +1,81 @@
+.container-indicator{
+    display: flex;
+    flex-direction: row;  
+    gap: 5px;
+    justify-content:space-around;
+    align-items: center;
+    
+}
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    background: #e0e0e0;
+    background: linear-gradient(90deg, rgba(224, 224, 224, 1) 4%, rgba(232, 232, 232, 0.55) 98%);
+}
+.main{
+    border: 3px ;
+}
+/* Estilos para el panel lateral */
+.detail-panel {
+  position: fixed !important;
+  right: 0 !important;
+  left: auto !important; /* Anular cualquier left que pueda estar aplicándose */
+  transform: none !important; /* Eliminar transformaciones que podrían centrarlo */
+  width: 50%;
+  min-width: 600px; /* Ancho mínimo para buena visualización */
+  height: 100vh;
+  background-color: white;
+  box-shadow: -2px 0 15px rgba(0,0,0,0.2);
+  z-index: 1000;
+  transition: right 0.3s ease-in-out;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Asegurar que el contenido principal se ajuste */
+.left-panel {
+  width: 50%;
+  transition: margin-right 0.3s ease-in-out;
+}
+  
+  .btn-close-panel {
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    z-index: 1001;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* Overlay para fondo oscuro cuando el panel está abierto */
+  .overlay-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.3);
+    backdrop-filter: blur(5px);
+   z-index: 999;
+  }
+  overlay-blur {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.15);    /* antes 0.3, ahora 0.15 */
+    backdrop-filter: blur(2.5px);         /* antes 8px, ahora 4px */
+    z-index: 998;
+  }
+  
+  /* Si difuminas el panel izquierdo con .blur-effect */
+  .blur-effect {
+    filter: blur(3px);                  /* antes 5px, ahora 2px */
+    transition: filter 0.5s ease;
+    pointer-events: none;
+  }

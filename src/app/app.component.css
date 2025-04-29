@@ -1,0 +1,44 @@
+:host {
+  display: block;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
+.main-container {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  position: relative;
+}
+
+app-control-sidebar {
+  width: 250px;
+  height: 100vh;
+  flex-shrink: 0;
+  background: #f8f9fc;
+  overflow-y: hidden !important; /* Desactiva el scroll vertical */
+  overflow-x: hidden !important; /* Opcional: Desactiva el scroll horizontal */
+  z-index: 1000;
+}
+.content-wrapper {
+  flex: 1;
+  min-width: 0; /* Fix para overflow en flex */
+  height: 100vh;
+  overflow-y: auto;
+  background: #f8f9fc;
+  padding: 20px;
+}
+
+/* Correcciones para el sidebar de Bootstrap */
+.sidebar {
+  width: 250px !important;
+  height: 100vh !important;
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+}
+
+.navbar-nav {
+  width: 100% !important;
+}

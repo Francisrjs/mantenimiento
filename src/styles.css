@@ -1,0 +1,84 @@
+/* You can add global styles to this file, and also import other style files */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+  
+  body {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .wrapper {
+    display: flex;
+    flex: 1;              /* Esto es clave: la wrapper ocupa todo lo disponible */
+    min-height: 0;         /* Importante para que no cause overflow */
+  }
+  
+  app-control-sidebar {
+    width: 250px;
+    flex-shrink: 0;
+  }
+  
+  .content {
+    flex-grow: 1;
+    padding: 20px;/* Agrega esto a tus estilos globales o al componente principal */
+    :host {
+      display: block;
+      height: 100vh;
+      width: 100vw;
+    }
+    
+    .wrapper {
+      display: grid;
+      grid-template-columns: 250px 1fr;
+      height: 100vh;
+      width: 100vw;
+      position: fixed;
+      top: 0;
+      left: 0;
+    }
+    
+    app-control-sidebar {
+      width: 250px !important;
+      height: 100vh;
+      background: #4e73df;
+      overflow-y: auto;
+    }
+    
+    .content {
+      width: 100%;
+      height: 100vh;
+      overflow-y: auto;
+      background: #f8f9fc;
+      padding: 20px;
+      position: relative;
+    }
+    
+    /* Correcciones específicas para el sidebar de Bootstrap */
+    .navbar-nav {
+      width: 250px !important;
+      height: 100vh !important;
+      padding: 0.5rem 1rem;
+    }
+    
+    .sidebar {
+      position: fixed !important;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+    }
+    
+    .sidebar-dark {
+      background-color: #4e73df !important;
+      background-image: linear-gradient(180deg, #4e73df 10%, #224abe 100%) !important;
+    }
+    
+    .sidebar-brand {
+      padding: 1.5rem 1rem !important;
+    }
+    background-color: #f8f9fc;
+    overflow-y: auto;      /* Para que puedas hacer scroll si el contenido es largo */
+  }
+  

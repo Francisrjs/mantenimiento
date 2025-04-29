@@ -1,0 +1,4 @@
+#accordionSidebar{
+    overflow-y: hidden !important; /* Desactiva el scroll vertical */
+  overflow-x: hidden !important; /* Opcional: Desactiva el scroll horizontal */
+}
