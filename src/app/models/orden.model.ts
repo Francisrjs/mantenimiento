@@ -1,3 +1,4 @@
+import { Item } from "./item.model";
 import { Mecanico } from "./mecanico.model";
 
 export interface Orden {
@@ -11,9 +12,10 @@ export interface Orden {
     patenteSemi1: string;
     patenteSemi2: string;
     odometro: number;
+    items?: Item[];
     tipoTrabajo: string[];
     anomalia: string;
-    detalle: string;
+    comentario: string;
     mecanicoId: number[];  // IDs de los mecánicos
     usuario: string;
   }

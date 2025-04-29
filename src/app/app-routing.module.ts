@@ -6,6 +6,10 @@ import { OrdenesDetailComponent } from './pages/ordenes-detail/ordenes-detail.co
 import { OrdenesViewTableComponent } from './pages/ordenes-view-table/ordenes-view-table.component';
 import { MainLayoutComponent } from './layouts/main-layout/main-layout.component';
 
+import { ItemOrdenesComponent } from './plan/item-ordenes/item-ordenes.component';
+import { ItemsContainerComponent } from './plan/items-container/items-container.component';
+import { ItemsComponent } from './plan/items/items.component';
+
 const routes: Routes = [
   {
     path: '',
@@ -15,6 +19,8 @@ const routes: Routes = [
       { path: 'ordenes', component: OrdenesComponent },
       { path: 'ordenes/:ordenId', component: OrdenesDetailComponent },
       { path: 'table', component: OrdenesViewTableComponent },
+      {path: 'items', component: ItemsComponent},
+      {path: 'ordenesItem',component:ItemsContainerComponent}
     ]
   },
   { path: '**', redirectTo: '' }

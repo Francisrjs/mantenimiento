@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { OrdenesMantenimiento } from '../pages/ordenes/ordenes.mock';
 import { Orden } from '../models/orden.model';
 import { Observable, of } from 'rxjs';
+import { OrdenesMantenimiento } from '../mocks/ordenes.mock';
 
 @Injectable({
   providedIn: 'root'

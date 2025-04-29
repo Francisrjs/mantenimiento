@@ -44,7 +44,7 @@ export class OrdenesAddComponent implements OnInit {
         this.tipoTrabajoList.map(() => this.fb.control(false))
       ),
       anomalia: [''],
-      detalle: [''],
+      comentario: [''],
       mecanico: [[]]
     });
     this.tipoTrabajoList = (Object.keys(TiposTrabajo) as Array<keyof typeof TiposTrabajo>)
@@ -92,7 +92,7 @@ export class OrdenesAddComponent implements OnInit {
       odometro: fv.odometro,
       tipoTrabajo: selectedKeys,
       anomalia: fv.anomalia,
-      detalle: fv.detalle,
+      comentario: fv.comentario,
       mecanicoId: fv.mecanico,
       usuario: ''
     };

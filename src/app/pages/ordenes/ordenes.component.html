@@ -5,10 +5,10 @@
     class="overlay-blur"
     (click)="closeDetail()"></div>
   <div class="left-panel flex-grow-1 p-4 overflow-auto" [class.blur-effect]="selectedOrden">
-    <h2 class="text-center gap-2">Órdenes de trabajo</h2>
+    <h2 class="text-center gap-2 ">Órdenes de trabajo</h2>
 
     <!-- Indicadores -->
-    <div class="container-indicator border border-secondary rounded mt-2 p-2 d-flex justify-content-around">
+    <div class="container-indicator border border-secondary rounded mt-2 p-2 d-flex justify-content-around t-5">
       <div class="indicador text-center">
         <iconify-icon icon="f7:wrench-fill" width="56" height="56"></iconify-icon>
         <div class="p-2">
@@ -105,7 +105,7 @@
               <span class="badge bg-secondary" *ngFor="let t of orden.tipoTrabajo">{{ t }}</span>
             </div>
             <small class="text-muted">Detalle</small>
-            <p class="text-truncate">{{ orden.detalle || 'Sin detalles' }}</p>
+            <p class="text-truncate">{{ orden.comentario || 'Sin detalles' }}</p>
           </div>
           <div class="card-footer bg-transparent d-flex justify-content-between border border-secondary">
             <button class="btn btn-sm btn-outline-secondary" (click)="viewOrden(orden)">

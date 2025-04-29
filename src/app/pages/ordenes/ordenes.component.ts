@@ -10,7 +10,7 @@ import { ordenService } from 'src/app/services/orden.service';
   styleUrls: ['./ordenes.component.css']
 })
 export class OrdenesComponent implements OnInit {
-  faMagnifyingGlass= faMagnifyingGlass
+  faMagnifyingGlass= faMagnifyingGlass // remplazar por Icons= icons.search
   ordenList: Orden[] = [];
   allMecanicos: Mecanico[] = [];
   searchTerm = '';
@@ -52,7 +52,7 @@ export class OrdenesComponent implements OnInit {
   get ordenesFiltradas(): Orden[] {
     return this.ordenList.filter(orden => {
       const matchesSearch = orden.patente.toLowerCase().includes(this.searchTerm.toLowerCase()) || 
-                          orden.detalle.toLowerCase().includes(this.searchTerm.toLowerCase());
+                          orden.comentario.toLowerCase().includes(this.searchTerm.toLowerCase());
       
       const matchesDate = !this.fechaFiltro || 
                          orden.fechaIngreso.includes(this.fechaFiltro);

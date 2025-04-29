@@ -46,7 +46,7 @@ export class OrdenesDetailComponent implements OnInit {
       odometro:    [this.orden.odometro,     [Validators.required, Validators.min(0)]],
       tipoTrabajo: this.buildTipoTrabajoArray(),
       anomalia:    [this.orden.anomalia],
-      detalle:     [this.orden.detalle],
+      detalle:     [this.orden.comentario],
       mecanico:    [this.orden.mecanicoId],
       usuario:     [this.orden.usuario]
     });

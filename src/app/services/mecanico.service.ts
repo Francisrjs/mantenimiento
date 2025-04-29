@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { Mecanico } from '../models/mecanico.model';
-import { Mecanicos } from '../pages/ordenes/mecanico.mockup';
+import { Mecanicos } from '../mocks/mecanico.mockup';
 @Injectable({
   providedIn: 'root'
 })

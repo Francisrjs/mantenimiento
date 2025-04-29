@@ -42,7 +42,7 @@
       <p><strong>Odómetro:</strong> {{ orden.odometro }} KM</p>
       <p><strong>Trabajo:</strong> {{ orden.tipoTrabajo.join(', ') }}</p>
       <p><strong>Anomalía:</strong> {{ orden.anomalia }}</p>
-      <p><strong>Detalle:</strong> {{ orden.detalle }}</p>
+      <p><strong>Detalle:</strong> {{ orden.comentario }}</p>
       <p><strong>Mecánicos:</strong> {{ getMecanicosNombres(orden.mecanicoId || []) }}</p>
     </div>
   </ng-container>

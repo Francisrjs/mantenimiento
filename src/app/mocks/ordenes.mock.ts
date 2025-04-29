@@ -13,7 +13,7 @@ export const OrdenesMantenimiento: Orden[] = [
     odometro: 120000,
     tipoTrabajo: ["Bujes"],
     anomalia: "Cambio de bujes",
-    detalle: "Cambio de bujes, pernos y cinta de freno",
+    comentario: "Cambio de bujes, pernos y cinta de freno",
     mecanicoId: [1, 2], // IDs de RICARDO y CRISTIAN
     usuario: "US-0035"
   },
@@ -29,7 +29,7 @@ export const OrdenesMantenimiento: Orden[] = [
     odometro: 132000,
     tipoTrabajo: ["Vigia"],
     anomalia: "Falla en vigía",
-    detalle: "Reparación de vigía de rueda delantera derecha",
+    comentario: "Reparación de vigía de rueda delantera derecha",
     mecanicoId: [3, 4], // IDs de EZEQUIEL y DARIO
     usuario: "US-0035"
   },
@@ -45,7 +45,7 @@ export const OrdenesMantenimiento: Orden[] = [
     odometro: 143000,
     tipoTrabajo: ["Perdida de aire"],
     anomalia: "Pérdida de aire",
-    detalle: "Revisión y reparación de sistema de aire",
+    comentario: "Revisión y reparación de sistema de aire",
     mecanicoId: [4], // ID de DARIO
     usuario: "US-0035"
   },
@@ -61,7 +61,7 @@ export const OrdenesMantenimiento: Orden[] = [
     odometro: 98000,
     tipoTrabajo: ["Eje Neumatico"],
     anomalia: "Buje dañado",
-    detalle: "Reparación de buje eje neumático",
+    comentario: "Reparación de buje eje neumático",
     mecanicoId: [1], // ID de RICARDO
     usuario: "US-0035"
   },
@@ -77,7 +77,7 @@ export const OrdenesMantenimiento: Orden[] = [
     odometro: 128000,
     tipoTrabajo: ["Service"],
     anomalia: "Base de filtro",
-    detalle: "Cambio de base de filtro de combustible y bomba",
+    comentario: "Cambio de base de filtro de combustible y bomba",
     mecanicoId: [2], // ID de CRISTIAN
     usuario: "US-0035"
   },
@@ -93,7 +93,7 @@ export const OrdenesMantenimiento: Orden[] = [
     odometro: 114000,
     tipoTrabajo: ["Electrico", "Frenos"],
     anomalia: "Frenos y luces",
-    detalle: "Cambio de válvula de frenos y reparación de luces",
+    comentario: "Cambio de válvula de frenos y reparación de luces",
     mecanicoId: [1], // ID de RICARDO
     usuario: "US-0035"
   },
@@ -109,7 +109,7 @@ export const OrdenesMantenimiento: Orden[] = [
     odometro: 0,
     tipoTrabajo: ["Herrería"],
     anomalia: "Parante roto",
-    detalle: "Reparación de parante y engrases",
+    comentario: "Reparación de parante y engrases",
     mecanicoId: [1], // ID de RICARDO
     usuario: "US-0035"
   },
@@ -125,7 +125,7 @@ export const OrdenesMantenimiento: Orden[] = [
     odometro: 151000,
     tipoTrabajo: ["Engrase"],
     anomalia: "Engrase",
-    detalle: "Lavado y engrase",
+    comentario: "Lavado y engrase",
     mecanicoId: [4], // ID de DARIO
     usuario: "US-0035"
   },
@@ -141,7 +141,7 @@ export const OrdenesMantenimiento: Orden[] = [
     odometro: 109000,
     tipoTrabajo: ["Electrico"],
     anomalia: "Luces rotas",
-    detalle: "Reparación de baberos y luces",
+    comentario: "Reparación de baberos y luces",
     mecanicoId: [3], // ID de EZEQUIEL
     usuario: "US-0035"
   },
@@ -157,7 +157,7 @@ export const OrdenesMantenimiento: Orden[] = [
     odometro: 136000,
     tipoTrabajo: [],
     anomalia: "Goma destalonada",
-    detalle: "Cambio de goma y engrase",
+    comentario: "Cambio de goma y engrase",
     mecanicoId: [3], // ID de EZEQUIEL
     usuario: "US-0035"
   }
