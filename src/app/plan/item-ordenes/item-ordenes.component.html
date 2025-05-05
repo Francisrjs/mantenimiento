@@ -35,15 +35,38 @@
       <ng-container matColumnDef="actions">
           <th mat-header-cell *matHeaderCellDef> Acciones </th>
           <td mat-cell *matCellDef="let element" class="d-flex gap-2 ">
-                 <button class="btn btn-outline-danger " (click)="onDelete(element)">
+                 <button class="btn btn-outline-danger " (click)="toggleItemSelect(element)">
                   <fa-icon [icon]="icons.delete" [fixedWidth]="true"></fa-icon>
                 </button>
-                <button class="btn btn-outline-warning " (click)="onDelete(element)">
-                  <fa-icon [icon]="icons.timer" [fixedWidth]="true"></fa-icon>
-                </button>
+                <button
+                class="btn"
+                [ngClass]="
+                  itemService.isSelected(element) && element.trabajandoDesde
+                    ? 'btn-outline-warning'
+                    : 'btn-outline-success'
+                "
+                (click)="
+                  element.trabajandoDesde
+                    ? stopTimerItem(element)
+                    : startTimerItem(element)
+                "
+              >
+                <fa-icon
+                  [icon]="
+                    element.trabajandoDesde ? icons.pause : icons.timer
+                  "
+                ></fa-icon>
+              </button>
             </td>
           </ng-container>
-      
+          
+             <ng-container matColumnDef="tiempo">
+              <th mat-header-cell *matHeaderCellDef> Tiempo (s) </th>
+              <td mat-cell *matCellDef="let element">
+               {{ calculateElapsed(element) }}
+              </td>
+           </ng-container>
+ 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     

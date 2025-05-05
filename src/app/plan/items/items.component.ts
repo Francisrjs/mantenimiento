@@ -6,6 +6,7 @@ import { Item } from 'src/app/models/item.model';
 
 import { elementAt } from 'rxjs';
 import { FAICONS, getIconForTipo } from 'src/app/pages/core/fa-icons';
+import { ItemService } from 'src/app/services/item.service';
 
 
 // Interfaz de ejemplo
@@ -23,7 +24,7 @@ export interface PeriodicElement {
   styleUrls: ['./items.component.css']
 })
 export class ItemsComponent implements OnInit {
-  @Output() itemsSelect = new EventEmitter<Item>();
+  
   icons= FAICONS;
   getIcon=getIconForTipo;
   // Datos de tu tabla (puede cambiar según tu interfaz)
@@ -33,7 +34,7 @@ export class ItemsComponent implements OnInit {
   symbols: string[] = Array.from(new Set((this.dataSource.data as any[]).map(e => e.symbol)));
   selectedSymbols: string[] = [];
   filterValue = '';
-
+  constructor(public itemService: ItemService){}
   ngOnInit(): void {
     this.dataSource.filterPredicate = (data: any, filter: string) => {
       const [text, symbols] = filter.split('|');
@@ -72,8 +73,8 @@ export class ItemsComponent implements OnInit {
   }
   
   
-  onAdd(element: Item) {
-    this.itemsSelect.emit(element)
+  onAdd(item: Item) {
+    this.itemService.addItemSelect(item);
   }
   
 }

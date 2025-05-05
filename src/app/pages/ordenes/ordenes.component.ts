@@ -1,15 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import { faI, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { Mecanico } from 'src/app/models/mecanico.model';
 import { Orden } from 'src/app/models/orden.model';
 import { mecanicoService } from 'src/app/services/mecanico.service';
 import { ordenService } from 'src/app/services/orden.service';
+import { FAICONS } from '../core/fa-icons';
 @Component({
   selector: 'app-ordenes',
   templateUrl: './ordenes.component.html',
   styleUrls: ['./ordenes.component.css']
 })
 export class OrdenesComponent implements OnInit {
+  icons= FAICONS;
   faMagnifyingGlass= faMagnifyingGlass // remplazar por Icons= icons.search
   ordenList: Orden[] = [];
   allMecanicos: Mecanico[] = [];

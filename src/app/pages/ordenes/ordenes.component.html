@@ -4,33 +4,82 @@
     <div *ngIf="selectedOrden" 
     class="overlay-blur"
     (click)="closeDetail()"></div>
-  <div class="left-panel flex-grow-1 p-4 overflow-auto" [class.blur-effect]="selectedOrden">
+  <div class="left-panel flex-grow-1 p-4 overflow-auto mb-3" [class.blur-effect]="selectedOrden">
     <h2 class="text-center gap-2 ">Órdenes de trabajo</h2>
 
-    <!-- Indicadores -->
-    <div class="container-indicator border border-secondary rounded mt-2 p-2 d-flex justify-content-around t-5">
-      <div class="indicador text-center">
-        <iconify-icon icon="f7:wrench-fill" width="56" height="56"></iconify-icon>
-        <div class="p-2">
-          <h5>En Proceso</h5>
-          <span class="badge bg-primary fs-6">{{ ordenesEnProceso.length }}</span>
+<!-- Indicadores en formato Cards -->
+<div class="row gx-4 gy-3">
+
+  <!-- En Proceso -->
+  <div class="col-xl-3 col-md-6">
+    <div class="card border-left-primary shadow h-100 py-2">
+      <div class="card-body d-flex align-items-center">
+        <div class="flex-grow-1">
+          <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+            En Proceso
+          </div>
+          <div class="h5 mb-0 font-weight-bold text-gray-800">
+            {{ ordenesEnProceso.length }}
+          </div>
         </div>
-      </div>
-      <div class="indicador text-center">
-        <iconify-icon icon="tabler:clock" class="icon-indicator p-2" width="8vh" height="8vh"></iconify-icon>
-        <div class="p-2">
-          <h5>Pendientes</h5>
-          <span class="badge bg-warning text-dark fs-6">{{ ordenesPendientes.length }}</span>
-        </div>
-      </div>
-      <div class="indicador text-center">
-        <iconify-icon icon="mdi:check-circle-outline" class="icon-indicator p-2" width="8vh" height="8vh"></iconify-icon>
-        <div class="p-2">
-          <h5>Terminados</h5>
-          <span class="badge bg-success fs-6">{{ ordenesTerminadas.length }}</span>
+        <div class="col-auto">
+          <fa-icon 
+            [icon]="icons.wrench" 
+            size="2x" 
+            class="text-gray-300">
+          </fa-icon>
         </div>
       </div>
     </div>
+  </div>
+
+  <!-- Pendientes -->
+  <div class="col-xl-3 col-md-6">
+    <div class="card border-left-warning shadow h-100 py-2">
+      <div class="card-body d-flex align-items-center">
+        <div class="flex-grow-1">
+          <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+            Pendientes
+          </div>
+          <div class="h5 mb-0 font-weight-bold text-gray-800">
+            {{ ordenesPendientes.length }}
+          </div>
+        </div>
+        <div class="col-auto">
+          <fa-icon 
+            [icon]="icons.clock" 
+            size="2x" 
+            class="text-gray-300">
+          </fa-icon>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Terminados -->
+  <div class="col-xl-3 col-md-6">
+    <div class="card border-left-success shadow h-100 py-2">
+      <div class="card-body d-flex align-items-center">
+        <div class="flex-grow-1">
+          <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+            Terminados
+          </div>
+          <div class="h5 mb-0 font-weight-bold text-gray-800">
+            {{ ordenesTerminadas.length }}
+          </div>
+        </div>
+        <div class="col-auto">
+          <fa-icon 
+            [icon]="icons.check" 
+            size="2x" 
+            class="text-gray-300">
+          </fa-icon>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
 
     <!-- Barra de búsqueda y filtros -->
     <div class="container-filters bg-light p-3 rounded mt-4 border border-secondary">

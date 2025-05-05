@@ -1,4 +1,4 @@
-import { faMagnifyingGlass, faEdit, faTrash, faPlus, faEye, faWrench, faPenToSquare, faHammer, faBolt, faTimesSquare, faClock } from '@fortawesome/free-solid-svg-icons';
+import { faMagnifyingGlass, faEdit, faTrash, faPlus, faEye, faWrench, faPenToSquare, faHammer, faBolt, faTimesSquare, faClock, faClinicMedical, faCheckCircle, faPause, faStarHalfStroke, faPlay } from '@fortawesome/free-solid-svg-icons';
 
 export const FAICONS = {
   search: faMagnifyingGlass,
@@ -9,7 +9,12 @@ export const FAICONS = {
   wrench: faWrench,
   hammer: faHammer,
   bolt: faBolt,
-  timer: faClock
+  timer: faClock,
+  clock: faClock,
+  check: faCheckCircle,
+  pause: faPause,
+  start: faStarHalfStroke,
+  play: faPlay
 };
 export function getIconForTipo(tipo: string) {
   switch (tipo) {

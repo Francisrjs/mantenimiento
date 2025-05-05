@@ -1,6 +1,7 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, inject } from '@angular/core';
 import { Item } from 'src/app/models/item.model';
 import { FAICONS } from 'src/app/pages/core/fa-icons';
+import { ItemService } from 'src/app/services/item.service';
 
 @Component({
   selector: 'app-items-container',
@@ -8,20 +9,20 @@ import { FAICONS } from 'src/app/pages/core/fa-icons';
   styleUrls: ['./items-container.component.css']
 })
 export class ItemsContainerComponent {
+  private itemService: ItemService;
   selectedItems: Item[] = []; 
   icon = FAICONS;
   addingItem: boolean = false;
-
-  addItem(item: Item): void {
-    if (!this.selectedItems.some(x => x.id === item.id)) {
-      this.selectedItems = [...this.selectedItems, item]; 
-    }
+ 
+  constructor(itemService: ItemService){
+    this.itemService= itemService;
   }
-
   newItem() {
     this.addingItem = true;
   }
-
+  addItemSelect(item:Item){
+    this.itemService.addItemSelect(item);
+  }
   @HostListener('document:keydown.escape', ['$event'])
   handleEscapeKey(event: KeyboardEvent) {
     if (this.addingItem) {
@@ -30,7 +31,7 @@ export class ItemsContainerComponent {
   }
 
   handleItemSelect(item: Item) {
-    this.addItem(item);
+    this.addItemSelect(item);
     this.closeModal();
   }
 
