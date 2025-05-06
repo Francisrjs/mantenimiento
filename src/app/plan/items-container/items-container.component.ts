@@ -9,7 +9,8 @@ import { ItemService } from 'src/app/services/item.service';
   styleUrls: ['./items-container.component.css']
 })
 export class ItemsContainerComponent {
-  @Input() actionFilters: string[]=[]
+  @Input() actionFilters: String[]=[]
+  @Input() isWorkItem: boolean = true;
   private itemService: ItemService;
   selectedItems: Item[] = []; 
   icon = FAICONS;

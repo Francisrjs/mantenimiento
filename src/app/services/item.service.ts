@@ -13,8 +13,16 @@ export class ItemService {
     console.log(this._selectedItems());
     setInterval(() => this.now.set(Date.now()), 1000); // Cada segundo se actualiza
   }
+  readonly anomalies = computed(() =>
+    this.selectedItems().filter(i => i.accion === 'Anomalía')
+  );
+  readonly workItems = computed(() =>
+    this.selectedItems().filter(i =>
+      ['Revisar','Corregir','Cambiar'].includes(i.accion)
+    )
+  );
   addItemSelect(item: Item){
-    const current= this._selectedItems();
+    let current= this.selectedItems()
     if (!current.some(x => x.id === item.id)) {
       this._selectedItems.set([...current, item]);
       console.log(this._selectedItems());
@@ -35,9 +43,6 @@ export class ItemService {
         x.id == item.id  ? { ...x, trabajandoDesde: ahora } : x
       )
     )
-  }
-  acumulatorTimer(item:Item, ahora: Date,inicio: Date){
-    return Math.floor((ahora.getTime() - inicio.getTime()) / 1000);
   }
   stopTimerItem(item:Item){
     const ahora = new Date();

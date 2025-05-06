@@ -12,13 +12,29 @@ import { ItemService } from 'src/app/services/item.service';
 export class ItemOrdenesComponent  {
   icons = FAICONS;
   getIcon = getIconForTipo;
+  
+  private _isWorkItem = true;
+  displayedColumns: string[] = [];
 
-  displayedColumns: string[] = ['nombre','accion','tipo','actions','tiempo', 'responsable'];
+  @Input()
+  set isWorkItem(value: boolean) { //setter
+    this._isWorkItem = value;
+    this.displayedColumns = value
+      ? ['nombre','accion','tipo','actions','tiempo','responsable']
+      : ['nombre','accion','tipo','actions'];
+  }
+  get isWorkItem() { //getter
+    return this._isWorkItem;
+  }
+
+
+
+
   dataSource = new MatTableDataSource<Item>([]);
 
   constructor(public itemService: ItemService){
     effect(()=>{
-      this.dataSource.data= this.itemService.selectedItems();
+        this.dataSource.data= (this.isWorkItem) ? this.itemService.workItems() :   this.itemService.anomalies()
     })
   }
   set items(value: Item[]) {
@@ -28,12 +44,8 @@ export class ItemOrdenesComponent  {
   /**
    * Casos para seleccionar y eliminar
    */
-  toggleItemSelect(item: Item): void {
-    if (this.itemService.isSelected(item)){
-      this.itemService.deleteItemSelect(item);
-    } else{
+  addItemSelect(item: Item): void {
       this.itemService.addItemSelect(item);
-    }
   }
   startTimerItem(item:Item){
     this.itemService.startTimerItem(item);

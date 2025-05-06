@@ -9,6 +9,7 @@ import { MainLayoutComponent } from './layouts/main-layout/main-layout.component
 import { ItemOrdenesComponent } from './plan/item-ordenes/item-ordenes.component';
 import { ItemsContainerComponent } from './plan/items-container/items-container.component';
 import { ItemsComponent } from './plan/items/items.component';
+import { OrdenesAddComponent } from './pages/ordenes-add/ordenes-add.component';
 
 const routes: Routes = [
   {
@@ -19,6 +20,7 @@ const routes: Routes = [
       { path: 'ordenes', component: OrdenesComponent },
       { path: 'ordenes/:ordenId', component: OrdenesDetailComponent },
       { path: 'table', component: OrdenesViewTableComponent },
+      { path: 'ordenes/add', component: OrdenesAddComponent },
       {path: 'items', component: ItemsComponent},
       {path: 'ordenesItem',component:ItemsContainerComponent}
     ]

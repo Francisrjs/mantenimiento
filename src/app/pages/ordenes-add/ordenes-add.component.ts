@@ -2,6 +2,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Mecanico } from 'src/app/models/mecanico.model';
 import { Orden, TiposTrabajo } from 'src/app/models/orden.model';
+import { ItemService } from 'src/app/services/item.service';
 import { mecanicoService } from 'src/app/services/mecanico.service';
 import { ordenService } from 'src/app/services/orden.service';
 
@@ -23,7 +24,8 @@ export class OrdenesAddComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private ordenSvc: ordenService,
-    private mecSvc: mecanicoService
+    private mecSvc: mecanicoService,
+    public itemService: ItemService
   ) {}
 
   ngOnInit(): void {

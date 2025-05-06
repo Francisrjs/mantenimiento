@@ -22,14 +22,14 @@
     <div class="d-flex justify-content-around mb-4">
       <span></span>
       <div class="col-md-2">
-        <button class="btn btn-primary w-100" (click)="newItem()">
+        <button class="btn btn-primary w-100 btn-sm" (click)="newItem()">
           <fa-icon [icon]="icon.add" [fixedWidth]="true"></fa-icon> Nuevo Item
         </button>
       </div>
     </div>
     
     <div class="col-md-12">
-      <app-item-ordenes ></app-item-ordenes>
+      <app-item-ordenes [isWorkItem]="isWorkItem" ></app-item-ordenes>
     </div>
   </div>
 </div>
