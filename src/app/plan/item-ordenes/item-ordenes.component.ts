@@ -47,6 +47,9 @@ export class ItemOrdenesComponent  {
   addItemSelect(item: Item): void {
       this.itemService.addItemSelect(item);
   }
+  deleteItemSelect(item:Item): void{
+    this.itemService.deleteItemSelect(item);
+  }
   startTimerItem(item:Item){
     this.itemService.startTimerItem(item);
   }

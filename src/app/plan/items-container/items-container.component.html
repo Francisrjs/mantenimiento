@@ -19,8 +19,7 @@
 
   <!-- Contenido principal con efecto blur cuando el modal está abierto -->
   <div [class.blur-effect]="addingItem">
-    <div class="d-flex justify-content-around mb-4">
-      <span></span>
+    <div class="d-flex justify-content-end mb-4">
       <div class="col-md-2">
         <button class="btn btn-primary w-100 btn-sm" (click)="newItem()">
           <fa-icon [icon]="icon.add" [fixedWidth]="true"></fa-icon> Nuevo Item
