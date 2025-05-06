@@ -1,3 +1,4 @@
+
 <div class="row position-relative">
   <!-- Modal -->
   <div *ngIf="addingItem" class="modal-overlay" (click)="closeModal()">
@@ -10,7 +11,7 @@
                 aria-label="Cerrar"></button>
       </div>
       <div class="modal-body">
-        <app-items ></app-items>
+        <app-items [actionFilters]="actionFilters"></app-items>
       </div>
     </div>
   </div>
@@ -19,7 +20,7 @@
   <!-- Contenido principal con efecto blur cuando el modal está abierto -->
   <div [class.blur-effect]="addingItem">
     <div class="d-flex justify-content-around mb-4">
-      <h4>Item de trabajo Agregadas</h4>
+      <span></span>
       <div class="col-md-2">
         <button class="btn btn-primary w-100" (click)="newItem()">
           <fa-icon [icon]="icon.add" [fixedWidth]="true"></fa-icon> Nuevo Item

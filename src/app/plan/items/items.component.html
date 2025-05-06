@@ -6,7 +6,8 @@
   <input
     type="text"
     class="form-control"
-    (keyup)="applyFilter($event)"
+    [(ngModel)]="textFilter"
+    (ngModelChange)="applyCombinedFilter()"
     placeholder="Buscar por Nombre o detalle"
     #input
   >

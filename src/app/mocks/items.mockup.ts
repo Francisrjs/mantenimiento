@@ -105,5 +105,40 @@ export const ITEMS: Item[] = [
     accion: 'Revisar',
     tipo: 'Herrería',
     detalle_item: 'Arreglo de puerta de semi'
-  }
+  },
+  {
+    id: 16,
+    nombre: 'Bujes',
+    accion: 'Anomalía',
+    tipo: 'Mecánica',
+    detalle_item: 'Anomalia'
+  },
+  {
+    id: 17,
+    nombre: 'Perdida de Aire',
+    accion: 'Anomalía',
+    tipo: 'Mecánica',
+    detalle_item: 'Anomalia'
+  },
+  {
+    id: 18,
+    nombre: 'Bujes',
+    accion: 'Anomalía',
+    tipo: 'Mecánica',
+    detalle_item: 'Anomalia'
+  },
+  {
+    id: 19,
+    nombre: 'Electrico',
+    accion: 'Anomalía',
+    tipo: 'Eléctrica',
+    detalle_item: 'Anomalia'
+  },
+  {
+    id: 20,
+    nombre: 'Engrase',
+    accion: 'Anomalía',
+    tipo: 'Eléctrica',
+    detalle_item: 'Anomalia'
+  },
 ];

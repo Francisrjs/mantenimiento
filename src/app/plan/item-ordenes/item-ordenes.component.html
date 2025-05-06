@@ -29,7 +29,14 @@
               
           </td>
         </ng-container>
-    
+        <ng-container matColumnDef="responsable">
+          <th mat-header-cell *matHeaderCellDef> Responsable Mecanico</th>
+          <td mat-cell *matCellDef="let element">
+            <button class="btn btn-outline-success "><fa-icon [icon]="icons.userPlus" class="me-2"></fa-icon>
+              {{element.responsable}} </button>
+
+          </td>
+        </ng-container>
       <!-- Symbol Column -->
 
       <ng-container matColumnDef="actions">

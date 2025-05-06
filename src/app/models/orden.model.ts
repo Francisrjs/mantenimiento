@@ -9,8 +9,8 @@ export interface Orden {
     fechaIngreso: string;
     fechaEgreso: string;
     patente: string;
-    patenteSemi1: string;
-    patenteSemi2: string;
+    patenteSemi1: string; // No va 
+    patenteSemi2: string; // No va
     odometro: number;
     items?: Item[];
     tipoTrabajo: string[];

@@ -13,7 +13,7 @@ export class ItemOrdenesComponent  {
   icons = FAICONS;
   getIcon = getIconForTipo;
 
-  displayedColumns: string[] = ['nombre','accion','tipo','actions','tiempo'];
+  displayedColumns: string[] = ['nombre','accion','tipo','actions','tiempo', 'responsable'];
   dataSource = new MatTableDataSource<Item>([]);
 
   constructor(public itemService: ItemService){

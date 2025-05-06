@@ -50,11 +50,11 @@
       </div>
       <div class="col">
         <label class="form-label">Semi 1</label>
-        <input formControlName="patenteSemi1" class="form-control" />
+        <input formControlName="patenteSemi1" class="form-control"  value="456"  />
       </div>
       <div class="col">
         <label class="form-label">Semi 2</label>
-        <input formControlName="patenteSemi2" class="form-control" />
+        <input formControlName="patenteSemi2" class="form-control" value="456"/>
       </div>
     </div>
 
@@ -82,9 +82,13 @@
     <!-- Anomalía -->
     <div class="mb-3">
       <label class="form-label">Anomalía</label>
-      <textarea formControlName="anomalia" class="form-control" rows="2"></textarea>
+      <app-items-container [actionFilters]="['Anomalía']"></app-items-container>
     </div>
-
+<!-- Anomalía -->
+<div class="mb-3">
+  <label class="form-label">Items de trabajo</label>
+  <app-items-container [actionFilters]="['Revisar', 'Corregir','Cambiar']"></app-items-container>
+</div>
     <!-- Detalle -->
     <div class="mb-3">
       <label class="form-label">Detalle</label>

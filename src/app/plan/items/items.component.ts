@@ -1,4 +1,4 @@
-import { Component, EventEmitter,OnInit, Output } from '@angular/core';
+import { Component, EventEmitter,Input,OnInit, Output } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { faIcons, faLaughWink, faMagnifyingGlass, faPenToSquare, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { ITEMS } from 'src/app/mocks/items.mockup';
@@ -24,46 +24,45 @@ export interface PeriodicElement {
   styleUrls: ['./items.component.css']
 })
 export class ItemsComponent implements OnInit {
-  
   icons= FAICONS;
   getIcon=getIconForTipo;
+
+  @Input() actionFilters: string[]=[]; // Filter acciones
+  @Input() textFilter = '';                  // opcional: texto de búsqueda
   // Datos de tu tabla (puede cambiar según tu interfaz)
   displayedColumns = ['id','nombre','accion','tipo','detalle_item','actions'];
   dataSource = new MatTableDataSource<Item>(ITEMS);
 
-  symbols: string[] = Array.from(new Set((this.dataSource.data as any[]).map(e => e.symbol)));
-  selectedSymbols: string[] = [];
-  filterValue = '';
   constructor(public itemService: ItemService){}
   ngOnInit(): void {
     this.dataSource.filterPredicate = (data: any, filter: string) => {
-      const [text, symbols] = filter.split('|');
+      const { text, actions } = JSON.parse(filter) as {
+        text: string;
+        actions: string[];
+      };
       const matchesText = data.nombre.toLowerCase().includes(text) || data.detalle_item.toLowerCase().includes(text);
-      let matchesSymbol = true;
-      if (symbols) {
-        const selected = symbols.split(',');
-        matchesSymbol = selected.includes(data.symbol);
-      }
-      return matchesText && matchesSymbol;
+
+      const matchesAction= actions.length === 0 || actions.includes(data.accion);
+
+      return matchesText && matchesAction;
     };
+
+    //filtro inicial
+    this.applyCombinedFilter();
+  }
+  ngOnChanges(): void{
+    //si cambia el input
     this.applyCombinedFilter();
   }
 
-  applyFilter(event: Event): void {
-    const input = event.target as HTMLInputElement;
-    this.filterValue = input.value.trim().toLowerCase();
-    this.applyCombinedFilter();
+  applyCombinedFilter(): void {
+    const filter = {
+      text: this.textFilter.trim().toLowerCase(),
+      actions: this.actionFilters
+    };
+    this.dataSource.filter = JSON.stringify(filter);
   }
 
-  onSymbolsChange(): void {
-    this.applyCombinedFilter();
-  }
-
-  private applyCombinedFilter(): void {
-    const text = this.filterValue;
-    const symbols = this.selectedSymbols.join(',');
-    this.dataSource.filter = text + '|' + symbols;
-  }
   onEdit(element: any) {
     console.log('Editar', element);
   }

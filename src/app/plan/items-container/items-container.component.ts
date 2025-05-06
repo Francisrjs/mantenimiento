@@ -1,4 +1,4 @@
-import { Component, HostListener, inject } from '@angular/core';
+import { Component, HostListener, inject, Input } from '@angular/core';
 import { Item } from 'src/app/models/item.model';
 import { FAICONS } from 'src/app/pages/core/fa-icons';
 import { ItemService } from 'src/app/services/item.service';
@@ -9,6 +9,7 @@ import { ItemService } from 'src/app/services/item.service';
   styleUrls: ['./items-container.component.css']
 })
 export class ItemsContainerComponent {
+  @Input() actionFilters: string[]=[]
   private itemService: ItemService;
   selectedItems: Item[] = []; 
   icon = FAICONS;
